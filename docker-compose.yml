@@ -1,0 +1,22 @@
+app:
+  build: ./app
+  links:
+    - db
+  volumes:
+    - ./../:/var/www/html/public/
+
+web:
+  image: nginx
+  ports:
+    - "80:80"
+  links:
+    - app
+  volumes:
+    - ./nginx/:/etc/nginx/conf.d/
+
+db:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+  volumes:
+    - ./mysql/data:/var/lib/mysql

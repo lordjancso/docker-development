@@ -1,0 +1,2 @@
+FROM php:fpm
+RUN usermod -u 1000 www-data
