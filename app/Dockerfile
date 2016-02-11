@@ -1,2 +1,7 @@
-FROM php:fpm
-RUN usermod -u 1000 www-data
+FROM ubuntu:14.04
+
+MAINTAINER lordjancso <lordjancso@gmail.com>
+
+RUN apt-get update
+
+VOLUME /var/www
