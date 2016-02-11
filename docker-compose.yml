@@ -1,7 +1,8 @@
 app:
   build: ./app
   volumes:
-    - ./..:/var/www
+    - ./..:/var/www/html/public
+  tty: true
 
 db:
   image: mysql
@@ -20,7 +21,7 @@ php:
 nginx:
   build: ./nginx
   ports:
-    - "80:80"
+    - 80:80
   links:
     - php
   volumes_from:
