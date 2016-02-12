@@ -1,15 +1,13 @@
 app:
   build: ./app
   volumes:
-    - ./..:/var/www
+    - ./..:/srv
   tty: true
 
 db:
   image: mysql
   environment:
     MYSQL_ROOT_PASSWORD: root
-    MYSQL_USER: root
-    MYSQL_PASSWORD: root
   ports:
     - 3306:3306
   volumes:
@@ -30,3 +28,10 @@ nginx:
     - php
   volumes_from:
     - app
+
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  links:
+    - db
+  ports:
+    - 8080:80

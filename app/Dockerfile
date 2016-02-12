@@ -3,4 +3,4 @@ MAINTAINER lordjancso <lordjancso@gmail.com>
 
 RUN apt-get update
 
-VOLUME /var/www
+VOLUME /srv
