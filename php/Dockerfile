@@ -26,6 +26,6 @@ RUN apt-get install -y libmemcached-dev \
 RUN pecl install memcache \
     && docker-php-ext-enable memcache
 
-ADD symfony.ini /usr/local/etc/php/conf.d/
+ADD config.ini /usr/local/etc/php/conf.d/
 
 RUN usermod -u 1000 www-data
