@@ -1,4 +1,6 @@
 FROM nginx
+MAINTAINER lordjancso <lordjancso@gmail.com>
 
-RUN apt-get update
+ADD default.conf /etc/nginx/conf.d/
+
 RUN usermod -u 1000 www-data

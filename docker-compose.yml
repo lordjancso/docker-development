@@ -1,15 +1,19 @@
 app:
   build: ./app
   volumes:
-    - ./..:/var/www/html/public
+    - ./..:/var/www
   tty: true
 
 db:
   image: mysql
   environment:
-    - MYSQL_ROOT_PASSWORD=root
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
+  ports:
+    - 3306:3306
   volumes:
-    - ./mysql/data:/var/lib/mysql
+    - ./mysql/var/lib/mysql:/var/lib/mysql
 
 php:
   build: ./php
@@ -26,5 +30,3 @@ nginx:
     - php
   volumes_from:
     - app
-  volumes:
-    - ./nginx:/etc/nginx/conf.d
