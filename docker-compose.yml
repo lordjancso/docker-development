@@ -26,6 +26,8 @@ nginx:
     - php
   volumes_from:
     - app
+  volumes:
+    - ./nginx/vhosts:/etc/nginx/conf.d
 
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
