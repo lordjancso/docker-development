@@ -16,6 +16,7 @@ db:
 
 php:
   container_name: php
+  hostname: docker-php
   build: ./php
   links:
     - db
