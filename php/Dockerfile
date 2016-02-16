@@ -28,4 +28,9 @@ RUN pecl install memcache \
 
 ADD config.ini /usr/local/etc/php/conf.d/
 
+RUN apt-get install -y git-core
+
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+
 RUN usermod -u 1000 www-data
