@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install intl \
     && docker-php-ext-install opcache \
+    && docker-php-ext-install zip \
     && docker-php-ext-install mbstring
 
 RUN apt-get install -y \
@@ -41,5 +42,9 @@ RUN apt-get install -y git-core
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
+
+RUN apt-get install -y nodejs npm
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN npm install -g less
 
 RUN usermod -u 1000 www-data
