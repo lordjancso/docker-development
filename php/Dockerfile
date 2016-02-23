@@ -48,3 +48,5 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less
 
 RUN usermod -u 1000 www-data
+
+WORKDIR /srv
