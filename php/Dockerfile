@@ -47,6 +47,9 @@ RUN apt-get install -y nodejs npm
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less
 
+RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
+RUN chmod a+x /usr/local/bin/symfony
+
 RUN usermod -u 1000 www-data
 
 WORKDIR /srv
