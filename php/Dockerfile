@@ -43,6 +43,10 @@ RUN apt-get install -y git-core
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
+RUN curl -L http://deployer.org/deployer.phar -o deployer.phar
+RUN mv deployer.phar /usr/local/bin/dep
+RUN chmod +x /usr/local/bin/dep
+
 RUN apt-get install -y nodejs npm
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less
