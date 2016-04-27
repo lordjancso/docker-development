@@ -38,7 +38,9 @@ RUN pecl install memcache \
 
 ADD config.ini /usr/local/etc/php/conf.d/
 
-RUN apt-get install -y git-core
+RUN apt-get install -y git
+RUN git config --global alias.s "status -s"
+RUN git config --global alias.lg "log --oneline --decorate --all --graph"
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
