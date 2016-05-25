@@ -49,12 +49,13 @@ RUN curl -L http://deployer.org/deployer.phar -o deployer.phar
 RUN mv deployer.phar /usr/local/bin/dep
 RUN chmod +x /usr/local/bin/dep
 
-RUN apt-get install -y nodejs npm
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g less
-
 RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
 RUN chmod a+x /usr/local/bin/symfony
+
+RUN apt-get update
+RUN apt-get install -y php5-dev php5-mysql gcc libpcre3-dev
+RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git
+RUN cd cphalcon/build && ./install
 
 RUN usermod -u 1000 www-data
 RUN echo "export TERM=xterm" >> /etc/bash.bashrc
