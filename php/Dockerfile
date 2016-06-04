@@ -54,8 +54,13 @@ RUN chmod a+x /usr/local/bin/symfony
 
 RUN apt-get update
 RUN apt-get install -y php5-dev php5-mysql gcc libpcre3-dev
-RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git
-RUN cd cphalcon/build && ./install
+RUN cd ~ && git clone --depth=1 git://github.com/phalcon/cphalcon.git
+RUN cd ~/cphalcon/build && ./install
+
+RUN cd ~ && git clone https://github.com/phalcon/phalcon-devtools.git
+RUN cd ~/phalcon-devtools && ./phalcon.sh
+RUN ln -s ~/phalcon-devtools/phalcon.php /usr/bin/phalcon
+RUN chmod ugo+x /usr/bin/phalcon
 
 RUN usermod -u 1000 www-data
 RUN echo "export TERM=xterm" >> /etc/bash.bashrc
