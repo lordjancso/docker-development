@@ -22,6 +22,10 @@ RUN apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
+RUN apt-get install -y git
+RUN git config --global alias.s "status -s"
+RUN git config --global alias.lg "log --oneline --decorate --all --graph"
+
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
 
@@ -36,11 +40,10 @@ RUN apt-get install -y libmemcached-dev \
 RUN pecl install memcache \
     && docker-php-ext-enable memcache
 
-ADD config.ini /usr/local/etc/php/conf.d/
+RUN cd ~ && git clone git://github.com/nicolasff/phpredis.git
+RUN cd ~/phpredis && phpize && ./configure && make && make install
 
-RUN apt-get install -y git
-RUN git config --global alias.s "status -s"
-RUN git config --global alias.lg "log --oneline --decorate --all --graph"
+ADD config.ini /usr/local/etc/php/conf.d/
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
