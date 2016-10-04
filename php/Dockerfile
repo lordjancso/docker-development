@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     mysql-client \
     libmysqlclient-dev \
+    libexif-dev \
+    && docker-php-ext-install exif \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install intl \
@@ -64,6 +66,23 @@ RUN cd ~ && git clone https://github.com/phalcon/phalcon-devtools.git
 RUN cd ~/phalcon-devtools && ./phalcon.sh
 RUN ln -s ~/phalcon-devtools/phalcon.php /usr/bin/phalcon
 RUN chmod ugo+x /usr/bin/phalcon
+
+RUN curl -L http://download.cdn.mozilla.net/pub/firefox/releases/46.0/linux-x86_64/en-GB/firefox-46.0.tar.bz2 -o ~/firefox.tar.bz2
+RUN cd ~ && tar xjf firefox.tar.bz2
+RUN mv ~/firefox/ /opt/firefox/
+RUN ln -s /opt/firefox/firefox /usr/bin/firefox
+RUN apt-get install -y libglib2.0-dev libgtk-3-dev
+RUN apt-get --reinstall install -y libasound2
+
+RUN apt-get install -y openjdk-7-jre-headless xvfb
+RUN curl -L http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -o ~/selenium-server-standalone-2.53.1.jar
+RUN Xvfb :10 -ac &
+RUN export DISPLAY=:10
+RUN nohup java -jar ~/selenium-server-standalone-2.53.1.jar >> nohup.out 2>&1 &
+
+RUN curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.2/php-cs-fixer.phar -o php-cs-fixer
+RUN chmod a+x php-cs-fixer
+RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 RUN usermod -u 1000 www-data
 RUN echo "export TERM=xterm" >> /etc/bash.bashrc
