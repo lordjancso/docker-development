@@ -13,10 +13,28 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./mysql/var/lib/mysql:/var/lib/mysql
-    # log_driver: none
 
   redis:
     image: redis
+
+  redis-commander:
+    image: dmportella/redis-commander
+    environment:
+      REDIS_PORT_6379_TCP_ADDR: redis
+      REDIS_PORT_6379_TCP_PORT: 6379
+    depends_on:
+      - redis
+    ports:
+      - 8079:8080
+
+  redis-browser:
+    image: inventid/redis-browser
+    depends_on:
+      - redis
+    ports:
+      - 8078:4567
+    volumes:
+      - ./redis:/opt/config
 
   php:
     hostname: docker-php
