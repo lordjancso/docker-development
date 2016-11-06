@@ -5,17 +5,17 @@ services:
     build: ./app
     volumes:
       - /srv:/srv
-    tty: true
+    command: /bin/true
 
   db:
-    image: mysql
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./mysql/var/lib/mysql:/var/lib/mysql
 
   redis:
-    image: redis
+    image: redis:3
 
   redis-commander:
     image: dmportella/redis-commander

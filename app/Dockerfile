@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM alpine
 MAINTAINER lordjancso <lordjancso@gmail.com>
 
 VOLUME /srv
