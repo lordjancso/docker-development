@@ -12,7 +12,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - ./mysql/var/lib/mysql:/var/lib/mysql
+      - /data/mysql:/var/lib/mysql
 
   redis:
     image: redis:3
