@@ -56,7 +56,7 @@ RUN cd ~ && git clone --depth=1 git://github.com/phalcon/cphalcon.git
 RUN cd ~/cphalcon/build && ./install
 
 RUN cd ~ && git clone https://github.com/phalcon/phalcon-devtools.git
-RUN cd ~/phalcon-devtools && ./phalcon.sh
+RUN cd ~/phalcon-devtools
 RUN ln -s ~/phalcon-devtools/phalcon.php /usr/bin/phalcon
 RUN chmod ugo+x /usr/bin/phalcon
 
