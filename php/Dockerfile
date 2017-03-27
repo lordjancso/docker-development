@@ -35,13 +35,6 @@ RUN apt-get install -y libmagickwand-dev \
     && pecl install imagick \
     && docker-php-ext-enable imagick
 
-RUN apt-get install -y libmemcached-dev \
-    && pecl install memcached \
-    && docker-php-ext-enable memcached
-
-RUN pecl install memcache \
-    && docker-php-ext-enable memcache
-
 RUN cd ~ && git clone git://github.com/nicolasff/phpredis.git
 RUN cd ~/phpredis && phpize && ./configure && make && make install
 
